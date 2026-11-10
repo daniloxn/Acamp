@@ -1,3 +1,7 @@
 .venv/
 __pycache__/
 data/
+node_modules/
+frontend/dist/
+.impeccable/review/
+.impeccable/mocks/

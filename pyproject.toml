@@ -16,4 +16,7 @@ dependencies = [
     "sqlmodel>=0.0.48",
     "pymupdf>=2.1",
     "python-docx>=1.2.0",
+    "fastapi>=0.162.2",
+    "uvicorn>=0.54.0",
+    "python-multipart>=0.0.33",
 ]

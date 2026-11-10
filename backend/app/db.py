@@ -217,6 +217,83 @@ def save_content(source_id: int, content: StudyContent) -> None:
         s.commit()
 
 
+def list_students() -> list[Student]:
+    with session() as s:
+        return list(s.exec(select(Student).order_by(Student.name)))
+
+
+def list_subjects(student_id: int) -> list[Subject]:
+    with session() as s:
+        return list(s.exec(select(Subject).where(Subject.student_id == student_id).order_by(Subject.name)))
+
+
+def get_topic(topic_id: int) -> Topic | None:
+    with session() as s:
+        return s.get(Topic, topic_id)
+
+
+def get_subject(subject_id: int) -> Subject | None:
+    with session() as s:
+        return s.get(Subject, subject_id)
+
+
+def list_sources(topic_id: int | None = None, pending_only: bool = False) -> list[Source]:
+    with session() as s:
+        q = select(Source).order_by(Source.created_at)
+        if topic_id is not None:
+            q = q.where(Source.topic_id == topic_id)
+        if pending_only:
+            q = q.where(Source.status.not_in(["done", "error"]))
+        return list(s.exec(q))
+
+
+def delete_source(source_id: int) -> None:
+    with session() as s:
+        qids = select(QuestionRow.id).where(QuestionRow.source_id == source_id)
+        fids = select(FlashcardRow.id).where(FlashcardRow.source_id == source_id)
+        for row in s.exec(select(QuestionAttempt).where(QuestionAttempt.question_id.in_(qids))):
+            s.delete(row)
+        for row in s.exec(select(FlashcardReview).where(FlashcardReview.flashcard_id.in_(fids))):
+            s.delete(row)
+        for model in (QuestionRow, FlashcardRow, StudyGuideRow):
+            for row in s.exec(select(model).where(model.source_id == source_id)):
+                s.delete(row)
+        src = s.get(Source, source_id)
+        topic_id = src.topic_id
+        s.delete(src)
+        s.flush()
+        used = select(FlashcardRow.subtopic_id).union(select(QuestionRow.subtopic_id))
+        for row in s.exec(select(SubTopicRow).where(SubTopicRow.topic_id == topic_id,
+                                                    SubTopicRow.id.not_in(used))):
+            s.delete(row)
+        s.commit()
+
+
+def topic_stats(student_id: int, topic_id: int) -> dict:
+    p = get_progress(student_id, topic_id)
+    with session() as s:
+        n_src = s.exec(select(func.count()).select_from(Source).where(Source.topic_id == topic_id)).one()
+        n_fc = s.exec(select(func.count()).select_from(FlashcardRow).join(Source)
+                      .where(Source.topic_id == topic_id)).one()
+    return {**p, "sources": n_src, "flashcards": n_fc}
+
+
+def last_answers(student_id: int, question_ids: list[int]) -> dict[int, QuestionAttempt]:
+    with session() as s:
+        rows = s.exec(select(QuestionAttempt).where(QuestionAttempt.student_id == student_id,
+                                                    QuestionAttempt.question_id.in_(question_ids))
+                      .order_by(QuestionAttempt.answered_at))
+        return {r.question_id: r for r in rows}
+
+
+def last_reviews(student_id: int, flashcard_ids: list[int]) -> dict[int, FlashcardReview]:
+    with session() as s:
+        rows = s.exec(select(FlashcardReview).where(FlashcardReview.student_id == student_id,
+                                                    FlashcardReview.flashcard_id.in_(flashcard_ids))
+                      .order_by(FlashcardReview.reviewed_at))
+        return {r.flashcard_id: r for r in rows}
+
+
 # ---------- consultas de estudo ----------
 def topic_subtopics(topic_id: int) -> list[SubTopicRow]:
     with session() as s:

@@ -1,4 +1,4 @@
-# Acamp — app de estudo (backend)
+# Acamp — app de estudo
 
 Recebe vídeos do YouTube, PDFs, DOCX e TXT e gera material de estudo com uma IA local, guardando tudo em SQLite, organizado por aluno → matéria → assunto → fontes.
 
@@ -22,6 +22,18 @@ Whisper e LLM rodam **estritamente em sequência**:
 - Tentativas de questões, incluindo quais o aluno errou.
 - Revisões de flashcards, com a data da próxima revisão.
 - Última posição do aluno em cada assunto, para ele continuar de onde parou.
+
+## Rodar o app
+```bash
+ollama serve                         # em outro terminal
+cd frontend && npm install && npm run build && cd ..
+cd backend && uv run uvicorn app.api:app --host 0.0.0.0 --port 8000
+```
+Depois é só abrir http://localhost:8000. Para usar pelo celular na mesma rede, abra `http://<ip-do-pc>:8000`.
+
+**Desenvolvimento do frontend:** com a API rodando, use `cd frontend && npm run dev` e abra http://localhost:5173 (o `/api` é redirecionado por proxy).
+
+A API tem um worker único em fila: as fontes são processadas uma por vez, e o que ficou pela metade é retomado quando o servidor reinicia.
 
 ## Comandos
 ```bash

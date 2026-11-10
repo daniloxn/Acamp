@@ -1,0 +1,170 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-11-09T23:59:00-03:00",
+  "title": "Design System: Acamp",
+  "extensions": {
+    "colorMeta": {
+      "green": { "role": "primary", "displayName": "Verde-Arquivo", "canonical": "#2f6b5e", "dark": "#6fb39f", "tonalRamp": ["#10261f", "#1a3c33", "#245347", "#2f6b5e", "#4f8a7c", "#7fb0a3", "#b5d3ca", "#e3efea"] },
+      "red": { "role": "secondary", "displayName": "Fio Vermelho", "canonical": "#b8322a", "dark": "#e0675c", "tonalRamp": ["#3a0f0c", "#5e1914", "#8a241e", "#b8322a", "#d2574d", "#e48a81", "#f0bab4", "#f9e6e3"] },
+      "amber": { "role": "tertiary", "displayName": "Âmbar de Carimbo", "canonical": "#8a5a10", "dark": "#e0b260", "tonalRamp": ["#2c1d05", "#4a300a", "#6a450e", "#8a5a10", "#ae7a2c", "#cfa35c", "#e8cd98", "#f7ecd6"] },
+      "ink": { "role": "neutral", "displayName": "Tinta Azul-Ardósia", "canonical": "#24323a", "dark": "#e8e4da", "tonalRamp": ["#121a1e", "#24323a", "#4f5d64", "#6b767a", "#8a9296", "#b0b7ba", "#d4d9db", "#eef1f2"] },
+      "ink-2": { "role": "neutral", "displayName": "Tinta Secundária", "canonical": "#4f5d64", "dark": "#b9b6ad" },
+      "ink-3": { "role": "neutral", "displayName": "Tinta Terciária", "canonical": "#6b767a", "dark": "#908e86" },
+      "ground": { "role": "neutral", "displayName": "Cartão-Creme", "canonical": "#f1ece0", "dark": "#161917", "tonalRamp": ["#2b2720", "#4a4436", "#6e6650", "#978d72", "#bdb398", "#d6ccb6", "#e7e0cf", "#f1ece0"] },
+      "ground-2": { "role": "neutral", "displayName": "Creme de Gaveta", "canonical": "#e7e0cf", "dark": "#1f2421" },
+      "card": { "role": "neutral", "displayName": "Papel de Ficha", "canonical": "#fbf8f0", "dark": "#e9e4d8" },
+      "rule": { "role": "neutral", "displayName": "Pauta Azul-Clara", "canonical": "#c9d6e3", "darkOnCard": "#cdd6dc" },
+      "line": { "role": "neutral", "displayName": "Fio de Bordas", "canonical": "#d6ccb6", "dark": "#343b37" },
+      "ground-dark": { "role": "neutral", "displayName": "Carvalho Escuro", "canonical": "#161917" },
+      "card-dark": { "role": "neutral", "displayName": "Cinza-Papel", "canonical": "#e9e4d8" }
+    },
+    "typographyMeta": {
+      "display": { "displayName": "Display", "purpose": "Título da página: assunto, saudação, adicionar conteúdo." },
+      "term": { "displayName": "Termo", "purpose": "Termo centralizado na frente do flashcard." },
+      "title": { "displayName": "Título de ficha", "purpose": "Título dentro de uma ficha (Continuar, fim do maço)." },
+      "card-text": { "displayName": "Texto de ficha", "purpose": "Texto serifado que assenta na pauta de 28px: verso, enunciado, visão geral." },
+      "reading": { "displayName": "Leitura", "purpose": "Parágrafos das seções do guia, até 70ch." },
+      "body": { "displayName": "Corpo", "purpose": "Interface geral." },
+      "button": { "displayName": "Botão", "purpose": "Botões, abas e controle segmentado." },
+      "label": { "displayName": "Etiqueta de gaveta", "purpose": "Versalete em cabeçalho de ficha, etiqueta de gaveta e legend de formulário." },
+      "stamp": { "displayName": "Carimbo", "purpose": "Carimbo de resultado e selo de nível." }
+    },
+    "shadows": [
+      { "name": "paper-rest", "value": "0 1px 1px rgba(36,50,58,.06), 0 6px 18px -8px rgba(36,50,58,.25)", "dark": "0 1px 1px rgba(0,0,0,.3), 0 8px 20px -10px rgba(0,0,0,.6)", "purpose": "Papel na mesa: fichas em repouso, etiqueta de gaveta, segmento ativo." },
+      { "name": "paper-lift", "value": "0 2px 3px rgba(36,50,58,.08), 0 18px 40px -16px rgba(36,50,58,.38)", "dark": "0 2px 4px rgba(0,0,0,.35), 0 22px 44px -18px rgba(0,0,0,.75)", "purpose": "Papel erguido: flashcard em mãos, perfil em hover." },
+      { "name": "focus-halo", "value": "0 0 0 3px var(--green-soft)", "purpose": "Halo de foco em campos de texto." }
+    ],
+    "motion": [
+      { "name": "state", "value": ".15s", "purpose": "Borda e fundo de botões e alternativas." },
+      { "name": "flip", "value": ".55s cubic-bezier(.2, .75, .25, 1)", "purpose": "Virada 3D da ficha." },
+      { "name": "deal", "value": ".35s cubic-bezier(.2, .8, .2, 1)", "purpose": "Ficha nova entra deslizando 28px e girando 1.5deg." },
+      { "name": "lift", "value": ".2s cubic-bezier(.2, .8, .2, 1)", "purpose": "Perfil sobe 3px e gira -0.4deg no hover." },
+      { "name": "rise", "value": ".3s cubic-bezier(.2, .8, .2, 1)", "purpose": "Feedback da questão sobe 6px." },
+      { "name": "pulse", "value": "1.6s ease-in-out infinite", "purpose": "Fio âmbar de uma fonte em processamento." },
+      { "name": "reduced-motion", "value": "durations .01ms", "purpose": "prefers-reduced-motion zera animações e transições." }
+    ],
+    "breakpoints": [
+      { "name": "compact", "value": "860px", "purpose": "Trilho some, barra superior, abas fixas, sumário do guia some." },
+      { "name": "phone", "value": "560px", "purpose": "Maço passa para 4:3.4 e a pilha aperta." }
+    ]
+  },
+  "components": [
+    {
+      "name": "Botão primário",
+      "kind": "button",
+      "refersTo": "button-primary",
+      "description": "Ação principal, como Continuar de onde parei.",
+      "html": "<button class=\"ds-btn ds-btn-primary\">Continuar de onde parei <svg width=\"18\" height=\"18\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M5 12h14\"/><path d=\"m12 5 7 7-7 7\"/></svg></button>",
+      "css": ".ds-btn { display: inline-flex; align-items: center; justify-content: center; gap: .5rem; min-height: 44px; padding: 0 1.1rem; border-radius: 6px; border: 1px solid var(--line, #d6ccb6); background: var(--card, #fbf8f0); color: var(--ink, #24323a); font: 600 .95rem/1.2 'Public Sans Variable', system-ui, sans-serif; cursor: pointer; white-space: nowrap; transition: background .15s, border-color .15s, transform .1s; } .ds-btn:active { transform: translateY(1px); } .ds-btn:focus-visible { outline: 2px solid var(--green, #2f6b5e); outline-offset: 2px; } .ds-btn-primary { background: var(--green, #2f6b5e); border-color: var(--green, #2f6b5e); color: var(--green-ink, #fff); } .ds-btn-primary:hover { filter: brightness(1.08); }"
+    },
+    {
+      "name": "Botão padrão",
+      "kind": "button",
+      "refersTo": "button-default",
+      "description": "Ação secundária em papel com borda.",
+      "html": "<button class=\"ds-btn-default\">Revisar de novo</button>",
+      "css": ".ds-btn-default { display: inline-flex; align-items: center; gap: .5rem; min-height: 44px; padding: 0 1.1rem; border-radius: 6px; border: 1px solid var(--line, #d6ccb6); background: var(--card, #fbf8f0); color: #24323a; font: 600 .95rem/1.2 'Public Sans Variable', system-ui, sans-serif; cursor: pointer; transition: border-color .15s, transform .1s; } .ds-btn-default:hover { border-color: var(--ink-3, #6b767a); } .ds-btn-default:active { transform: translateY(1px); } .ds-btn-default:focus-visible { outline: 2px solid var(--green, #2f6b5e); outline-offset: 2px; }"
+    },
+    {
+      "name": "Botão fantasma",
+      "kind": "button",
+      "refersTo": "button-ghost",
+      "description": "Ação terciária sem borda, como Apagar.",
+      "html": "<button class=\"ds-btn-ghost\">Apagar</button>",
+      "css": ".ds-btn-ghost { display: inline-flex; align-items: center; gap: .5rem; min-height: 34px; padding: 0 .75rem; border-radius: 6px; border: 1px solid transparent; background: transparent; color: var(--ink-2, #4f5d64); font: 600 .85rem/1.2 'Public Sans Variable', system-ui, sans-serif; cursor: pointer; transition: background .15s; } .ds-btn-ghost:hover { background: var(--ground-2, #e7e0cf); } .ds-btn-ghost:focus-visible { outline: 2px solid var(--green, #2f6b5e); outline-offset: 2px; }"
+    },
+    {
+      "name": "Campo de texto",
+      "kind": "input",
+      "refersTo": "input",
+      "description": "Campo de 44px em papel, foco verde com halo.",
+      "html": "<input class=\"ds-input\" placeholder=\"Cole o link do YouTube\" />",
+      "css": ".ds-input { width: 100%; min-height: 44px; padding: .55rem .8rem; background: var(--card, #fbf8f0); border: 1px solid var(--line, #d6ccb6); border-radius: 6px; color: #24323a; font: 400 16px/1.55 'Public Sans Variable', system-ui, sans-serif; } .ds-input::placeholder { color: #7a8488; } .ds-input:focus { outline: none; border-color: var(--green, #2f6b5e); box-shadow: 0 0 0 3px var(--green-soft, #d8e7df); }"
+    },
+    {
+      "name": "Chip de filtro",
+      "kind": "chip",
+      "refersTo": "chip",
+      "description": "Filtro de tópico; pressionado inverte para tinta.",
+      "html": "<div style=\"display:flex;gap:.5rem\"><button class=\"ds-chip\" aria-pressed=\"true\">Fase clara</button><button class=\"ds-chip\" aria-pressed=\"false\">Ciclo de Calvin</button></div>",
+      "css": ".ds-chip { display: inline-flex; align-items: center; gap: .35rem; min-height: 34px; padding: 0 .8rem; border-radius: 999px; border: 1px solid var(--line, #d6ccb6); background: transparent; color: var(--ink-2, #4f5d64); font: 500 .85rem/1 'Public Sans Variable', system-ui, sans-serif; cursor: pointer; } .ds-chip:hover { border-color: var(--ink-3, #6b767a); } .ds-chip[aria-pressed='true'] { background: var(--ink, #24323a); border-color: var(--ink, #24323a); color: var(--ground, #f1ece0); } .ds-chip:focus-visible { outline: 2px solid var(--green, #2f6b5e); outline-offset: 2px; }"
+    },
+    {
+      "name": "Ficha catalográfica",
+      "kind": "card",
+      "refersTo": "ficha",
+      "description": "Contêiner de todo conteúdo de estudo: cabeçalho com etiquetas, fio vermelho e pauta de 28px.",
+      "html": "<section class=\"ds-ficha\"><div class=\"ds-ficha-head\"><span class=\"ds-label\">Biologia</span><span class=\"ds-label\">Ontem</span></div><h2 class=\"ds-ficha-title\">Fotossíntese</h2><p class=\"ds-ficha-text\">Você parou em Flashcards · 7 de 12 questões certas</p></section>",
+      "css": ".ds-ficha { position: relative; max-width: 640px; padding-bottom: 1.4rem; background: #fbf8f0; color: #24323a; border-radius: 4px; box-shadow: 0 1px 1px rgba(36,50,58,.06), 0 6px 18px -8px rgba(36,50,58,.25); background-image: repeating-linear-gradient(to bottom, transparent 0 27px, #c9d6e3 27px 28px); background-position: 0 3.2rem; } .ds-ficha::before { content: ''; position: absolute; left: 0; right: 0; top: 2.6rem; height: 1.5px; background: #b8322a; } .ds-ficha-head { display: flex; justify-content: space-between; align-items: center; height: 2.6rem; padding: 0 1.25rem; } .ds-label { font: 600 .72rem/1.2 'Public Sans Variable', system-ui, sans-serif; letter-spacing: .09em; text-transform: uppercase; color: #6b767a; } .ds-ficha-title { position: relative; margin: .9rem 1.25rem 0; font: 600 1.9rem/1.2 'Source Serif 4 Variable', Georgia, serif; } .ds-ficha-text { position: relative; margin: .5rem 1.25rem 0; line-height: 28px; color: #4f5d64; font-family: 'Public Sans Variable', system-ui, sans-serif; }"
+    },
+    {
+      "name": "Abas do assunto",
+      "kind": "nav",
+      "refersTo": "tab",
+      "description": "Guia, Flashcards, Estudo inteligente; ativa com sublinhado vermelho.",
+      "html": "<div class=\"ds-tabs\" role=\"tablist\"><button class=\"ds-tab\" role=\"tab\" aria-selected=\"true\">Guia</button><button class=\"ds-tab\" role=\"tab\" aria-selected=\"false\">Flashcards</button><button class=\"ds-tab\" role=\"tab\" aria-selected=\"false\">Estudo inteligente</button></div>",
+      "css": ".ds-tabs { display: flex; gap: .25rem; border-bottom: 1px solid var(--line, #d6ccb6); } .ds-tab { padding: .7rem .9rem; border: 0; background: none; cursor: pointer; color: var(--ink-3, #6b767a); font: 600 .93rem/1.2 'Public Sans Variable', system-ui, sans-serif; border-bottom: 2px solid transparent; margin-bottom: -1px; } .ds-tab:hover { color: var(--ink, #24323a); } .ds-tab[aria-selected='true'] { color: var(--ink, #24323a); border-bottom-color: var(--red, #b8322a); } .ds-tab:focus-visible { outline: 2px solid var(--green, #2f6b5e); outline-offset: 2px; }"
+    },
+    {
+      "name": "Gaveta do trilho",
+      "kind": "nav",
+      "refersTo": "drawer-head",
+      "description": "Matéria como etiqueta de gaveta, assuntos com barra de acertos.",
+      "html": "<nav class=\"ds-drawer\"><div class=\"ds-drawer-head\"><span>Biologia</span><span>2</span></div><a class=\"ds-topic\" href=\"#\" aria-current=\"page\">Fotossíntese<span class=\"ds-meter\"><span style=\"width:58%\"></span></span></a><a class=\"ds-topic\" href=\"#\">Citologia<span class=\"ds-meter\"><span style=\"width:20%\"></span></span></a></nav>",
+      "css": ".ds-drawer { display: flex; flex-direction: column; gap: .25rem; width: 258px; padding: 1rem; background: var(--ground-2, #e7e0cf); } .ds-drawer-head { display: flex; justify-content: space-between; padding: .45rem .6rem; border-radius: 4px; background: var(--card, #fbf8f0); border: 1px solid var(--line, #d6ccb6); box-shadow: 0 1px 1px rgba(36,50,58,.06), 0 6px 18px -8px rgba(36,50,58,.25); font: 600 .72rem/1.2 'Public Sans Variable', system-ui, sans-serif; letter-spacing: .09em; text-transform: uppercase; color: var(--ink-2, #4f5d64); } .ds-topic { display: grid; gap: .15rem; padding: .55rem .6rem .55rem .9rem; border-radius: 4px; text-decoration: none; color: var(--ink-2, #4f5d64); font: 400 .92rem/1.4 'Public Sans Variable', system-ui, sans-serif; } .ds-topic:hover { background: var(--ground, #f1ece0); color: var(--ink, #24323a); } .ds-topic[aria-current='page'] { background: var(--ground, #f1ece0); color: var(--ink, #24323a); font-weight: 600; } .ds-topic:focus-visible { outline: 2px solid var(--green, #2f6b5e); outline-offset: 2px; } .ds-meter { display: block; height: 3px; background: var(--line, #d6ccb6); border-radius: 2px; overflow: hidden; } .ds-meter > span { display: block; height: 100%; background: var(--green, #2f6b5e); }"
+    },
+    {
+      "name": "Flashcard",
+      "kind": "custom",
+      "refersTo": "ficha",
+      "description": "Ficha 5:3 com pilha atrás; vira em 3D ao toque.",
+      "html": "<div class=\"ds-deck\"><div class=\"ds-card ds-stack\"></div><button class=\"ds-flip\" onclick=\"this.classList.toggle('is-flipped')\"><div class=\"ds-card ds-face\"><div class=\"ds-card-head\"><span>Termo</span><span class=\"ds-stamp\">Acertei</span></div><p class=\"ds-term\">Clorofila</p></div><div class=\"ds-card ds-face ds-back\"><div class=\"ds-card-head\"><span>Clorofila</span><span>Significado</span></div><p class=\"ds-meaning\">Pigmento verde que absorve luz para a fotossíntese.</p></div></button></div>",
+      "css": ".ds-deck { position: relative; width: 100%; max-width: 620px; aspect-ratio: 5 / 3; perspective: 1600px; } .ds-card { position: absolute; inset: 0; background: #fbf8f0; color: #24323a; border-radius: 4px; background-image: repeating-linear-gradient(to bottom, transparent 0 27px, #c9d6e3 27px 28px); background-position: 0 3.2rem; box-shadow: 0 1px 1px rgba(36,50,58,.06), 0 6px 18px -8px rgba(36,50,58,.25); } .ds-card::before { content: ''; position: absolute; left: 0; right: 0; top: 2.6rem; height: 1.5px; background: #b8322a; } .ds-stack { transform: translate(6px, 6px) rotate(1deg); opacity: .85; } .ds-flip { position: absolute; inset: 0; border: 0; padding: 0; background: none; cursor: pointer; transform-style: preserve-3d; transition: transform .55s cubic-bezier(.2,.75,.25,1); } .ds-flip.is-flipped { transform: rotateY(180deg); } .ds-flip:focus-visible { outline: 2px solid #2f6b5e; outline-offset: 2px; } .ds-face { display: flex; flex-direction: column; text-align: left; backface-visibility: hidden; -webkit-backface-visibility: hidden; box-shadow: 0 2px 3px rgba(36,50,58,.08), 0 18px 40px -16px rgba(36,50,58,.38); } .ds-back { transform: rotateY(180deg); } .ds-card-head { display: flex; justify-content: space-between; align-items: center; height: 2.6rem; padding: 0 1.25rem; font: 600 .72rem/1.2 'Public Sans Variable', system-ui, sans-serif; letter-spacing: .09em; text-transform: uppercase; color: #6b767a; } .ds-stamp { font: 700 .7rem/1 'Public Sans Variable', system-ui, sans-serif; letter-spacing: .08em; padding: .3rem .5rem; border: 1.5px solid currentColor; border-radius: 3px; transform: rotate(-3deg); color: #2f6b5e; } .ds-term { position: relative; margin: auto 1.5rem; align-self: center; text-align: center; font: 600 2.5rem/1.15 'Source Serif 4 Variable', Georgia, serif; } .ds-meaning { position: relative; margin: 1.1rem 1.5rem; font: 400 1.3rem/28px 'Source Serif 4 Variable', Georgia, serif; }"
+    },
+    {
+      "name": "Alternativa de questão",
+      "kind": "custom",
+      "refersTo": "ficha",
+      "description": "Alternativa de 52px com letra em círculo; acerto verde, erro vermelho.",
+      "html": "<div style=\"display:flex;flex-direction:column;gap:.5rem;max-width:620px\"><button class=\"ds-option\"><span class=\"ds-letter\">A</span>Na membrana do tilacoide</button><button class=\"ds-option is-right\"><span class=\"ds-letter\">B</span>No estroma do cloroplasto</button><button class=\"ds-option is-wrong\"><span class=\"ds-letter\">C</span>Na mitocôndria</button></div>",
+      "css": ".ds-option { width: 100%; display: flex; align-items: flex-start; gap: .8rem; text-align: left; padding: .75rem .9rem; min-height: 52px; border-radius: 6px; border: 1px solid #d6ccb6; background: #fffdf8; color: #24323a; cursor: pointer; font: 400 1rem/1.45 'Public Sans Variable', system-ui, sans-serif; transition: border-color .15s, background .15s; } .ds-option:hover { border-color: #2f6b5e; background: #f4f8f5; } .ds-option:focus-visible { outline: 2px solid #2f6b5e; outline-offset: 2px; } .ds-letter { flex: none; width: 26px; height: 26px; display: grid; place-items: center; border-radius: 50%; border: 1px solid #c9bfa8; font-weight: 700; font-size: .8rem; color: #4f5d64; } .ds-option.is-right { border-color: #2f6b5e; background: #e6f0eb; } .ds-option.is-right .ds-letter { background: #2f6b5e; border-color: #2f6b5e; color: #fff; } .ds-option.is-wrong { border-color: #b8322a; background: #f8e7e3; } .ds-option.is-wrong .ds-letter { background: #b8322a; border-color: #b8322a; color: #fff; }"
+    }
+  ],
+  "narrative": {
+    "northStar": "O Fichário de Biblioteca",
+    "overview": "O Acamp é um fichário de biblioteca. Matérias são gavetas com etiqueta, assuntos são as guias dentro da gaveta, e tudo o que se estuda (flashcards, questões, o card de \"Continuar\", cada fonte em processamento) é uma ficha catalográfica de papel creme, com pauta azul-clara e um fio vermelho que separa o cabeçalho do corpo. A ficha é a unidade do sistema: quando algo é conteúdo de estudo, ele mora numa ficha; quando é ferramenta (filtros, formulário, abas), fica solto sobre o fundo de cartão.\n\nA densidade é calma e de leitura. O texto de estudo é serifado (Source Serif 4) e assenta na pauta de 28px; a interface fala em sans sóbria (Public Sans), e as etiquetas de gaveta são versaletes com tracking. A cor é escassa: o verde-arquivo marca o que se clica e o que se acertou, o vermelho do fio marca o atual, o erro e o alerta, e o âmbar marca o \"difícil\" e o que está em andamento. No escuro, a gaveta vira carvalho escuro e as fichas continuam papel: um cinza-papel claro com a mesma tinta azul-ardósia.\n\nO sistema recusa o painel genérico de cartões com gradiente e mascote. A profundidade vem de sombras suaves de papel sobre a mesa, nunca de sombras duras deslocadas.",
+    "keyCharacteristics": [
+      "A ficha catalográfica (pauta 28px + fio vermelho a 2.6rem do topo) é o contêiner de todo conteúdo de estudo.",
+      "Flashcards em proporção real 5:3, com pilha visível atrás e virada em 3D.",
+      "Serifa para ler, sans para operar, versalete para etiquetar.",
+      "Uma cor de ação (verde) restrita ao clicável e ao acerto.",
+      "Fichas continuam papel claro no tema escuro."
+    ],
+    "rules": [
+      { "name": "The Paper Stays Paper Rule", "body": "No tema escuro só a mesa escurece. Dentro de uma ficha, o texto usa a tinta clara-tema literal (#24323a, #4f5d64, #6b767a) e não as variáveis `--ink*`, porque a ficha continua papel claro. Toda nova ficha deve fixar a tinta do papel, não herdar a da mesa.", "section": "colors" },
+      { "name": "The Clickable Green Rule", "body": "O verde aparece em controles clicáveis, no foco e em estados de acerto. Não pinte títulos, etiquetas ou decoração de verde.", "section": "colors" },
+      { "name": "The Red Thread Rule", "body": "O vermelho marca \"aqui\" e \"errado\": fio da ficha, aba ativa, item atual, erro. Ele não é cor de botão de ação.", "section": "colors" },
+      { "name": "The Pauta Rule", "body": "Texto serifado dentro de uma ficha usa `line-height: 28px`, igual ao passo da pauta (linha de 1px a cada 28px, começando em 3.2rem). O texto senta na linha.", "section": "typography" },
+      { "name": "The Label Lives In A Head Rule", "body": "O versalete só aparece onde um fichário teria etiqueta: cabeçalho de ficha (`ficha-head`, à esquerda e à direita do fio), etiqueta de gaveta e `legend` de grupo de formulário. Ele não flutua acima de títulos de página.", "section": "typography" },
+      { "name": "The Tabular Numbers Rule", "body": "Contagens, datas e placares usam `font-variant-numeric: tabular-nums`.", "section": "typography" },
+      { "name": "The Soft Paper Rule", "body": "Sombra só em papel e sempre difusa. Nunca sombra dura deslocada.", "section": "elevation" }
+    ],
+    "dos": [
+      "**Do** colocar todo conteúdo de estudo numa ficha, com cabeçalho de 2.6rem, fio vermelho e pauta de 28px.",
+      "**Do** assentar texto serifado de ficha em `line-height: 28px`.",
+      "**Do** fixar a tinta clara-tema (#24323a) dentro das fichas para que funcionem nos dois temas.",
+      "**Do** reservar o verde para o clicável, o foco e o acerto.",
+      "**Do** usar Source Serif 4 para estudo e títulos, Public Sans para interface.",
+      "**Do** manter alvos de toque de 44px ou mais e respeitar `prefers-reduced-motion`.",
+      "**Do** usar ícones SVG de traço (lucide) a 13-18px, alinhados ao texto."
+    ],
+    "donts": [
+      "**Don't** usar gradientes, mascotes ou cartões de painel genéricos; o contêiner é a ficha.",
+      "**Don't** usar IBM Plex; a sans é Public Sans.",
+      "**Don't** usar sombras duras deslocadas; só as duas sombras difusas de papel.",
+      "**Don't** pôr etiqueta em versalete acima de títulos de página; ela vive no cabeçalho da ficha, na gaveta e em `legend`.",
+      "**Don't** usar o vermelho como cor de botão de ação.",
+      "**Don't** escurecer a ficha no tema escuro; só a mesa escurece."
+    ]
+  }
+}
