@@ -25,8 +25,8 @@ Regras obrigatórias:
    com summary explicativo e key_points (os pontos principais para estudar).
 5. flashcards: {n_cards} cards. term = um termo ou conceito citado (curto, ex.: "Clorofila");
    meaning = SOMENTE o significado / o que é, em 1-2 frases. Nada de perguntas na frente.
-6. questions: {n_q} questões de múltipla escolha, distribuídas igualmente entre difficulty
-   "facil" (lembrar/definir), "medio" (compreender/relacionar) e "dificil" (aplicar/analisar).
+6. questions: {n_q} questões de múltipla escolha, EXATAMENTE {n_lvl} de cada difficulty:
+   {n_lvl} "facil" (lembrar/definir), {n_lvl} "medio" (compreender/relacionar) e {n_lvl} "dificil" (aplicar/analisar).
    EXATAMENTE 4 alternativas, apenas UMA correta, correct_index 0-3 aponta para ela.
    explanation justifica a resposta. Cubra todos os subtópicos.
 7. Todo subtopic_id de flashcards e questions deve ser um id existente em subtopics.
@@ -70,12 +70,33 @@ def _shuffle_options(content: StudyContent, rng: random.Random) -> None:
         q.correct_index = q.options.index(correct)
 
 
+def _level_counts(content: StudyContent) -> dict[str, int]:
+    counts = {"facil": 0, "medio": 0, "dificil": 0}
+    for q in content.questions:
+        counts[q.difficulty] += 1
+    return counts
+
+
+def _balance(content: StudyContent, n_lvl: int) -> None:
+    """Corta o excesso: cada nível fica com no máximo o mesmo número do menor (e nunca mais que n_lvl)."""
+    cap = min(max(min(_level_counts(content).values()), n_lvl - 1), n_lvl)
+    seen = {"facil": 0, "medio": 0, "dificil": 0}
+    kept = []
+    for q in content.questions:
+        if seen[q.difficulty] < cap:
+            seen[q.difficulty] += 1
+            kept.append(q)
+    if len(kept) >= 6:
+        content.questions = kept
+
+
 def generate_study_content(title: str, text: str, existing_subtopics: list[str] = (),
-                           max_attempts: int = 2) -> StudyContent:
+                           max_attempts: int = 3) -> StudyContent:
     n_cards, n_q = _counts(len(text))
     if len(text) > MAX_DIRECT_CHARS:
         text = _condense(text)
-    system = SYSTEM_PROMPT.format(n_cards=n_cards, n_q=n_q)
+    n_lvl = n_q // 3
+    system = SYSTEM_PROMPT.format(n_cards=n_cards, n_q=n_q, n_lvl=n_lvl)
     if existing_subtopics:
         system += ("\n\nEste assunto JÁ TEM os subtópicos abaixo (de outras fontes). Quando o conteúdo tratar "
                    "do mesmo tema, REUTILIZE o nome EXATAMENTE igual; só crie um subtópico novo se for um tema "
@@ -88,11 +109,19 @@ def generate_study_content(title: str, text: str, existing_subtopics: list[str] 
         raw = _chat([{"role": "system", "content": system + extra}, {"role": "user", "content": user}], fmt=schema)
         try:
             content = StudyContent.model_validate_json(raw)
-            _shuffle_options(content, random.Random(title))
-            return content
         except ValidationError as e:
             last_err = e
             print(f"  tentativa {attempt}: JSON inválido ({e.error_count()} erros), tentando de novo...", flush=True)
+            continue
+        counts = _level_counts(content)
+        if min(counts.values()) < n_lvl - 1 and attempt < max_attempts:
+            # desequilíbrio grande entre níveis: pede de novo (o último resultado válido é aceito)
+            last_err = f"as questões vieram {counts}; precisa de EXATAMENTE {n_lvl} de cada nível."
+            print(f"  tentativa {attempt}: níveis desequilibrados {counts}, tentando de novo...", flush=True)
+            continue
+        _balance(content, n_lvl)
+        _shuffle_options(content, random.Random(title))
+        return content
     raise RuntimeError(f"LLM não gerou JSON válido após {max_attempts} tentativas: {last_err}")
 
 
