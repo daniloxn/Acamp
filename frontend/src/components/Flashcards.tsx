@@ -12,6 +12,13 @@ const RESULTS: { r: ReviewResult; label: string; key: string; when: string }[] =
   { r: 'acertei', label: 'Acertei', key: '3', when: 'volta em 3 dias' },
 ]
 
+function dueLabel(iso: string) {
+  const d = new Date(iso), diff = d.getTime() - Date.now()
+  if (diff <= 0) return 'hoje'
+  if (diff < 36e5) return 'em ' + Math.max(1, Math.round(diff / 6e4)) + ' min'
+  return 'em ' + d.toLocaleDateString('pt-BR', { day: '2-digit', month: '2-digit' })
+}
+
 export default function Flashcards({ topicId, resume, onPosition }: { topicId: number; resume: string; onPosition: (p: string) => void }) {
   const { student } = useStudent()
   const [subtopics, setSubtopics] = useState<SubTopic[]>([])
@@ -97,6 +104,7 @@ export default function Flashcards({ topicId, resume, onPosition }: { topicId: n
               <div className="ficha face back">
                 <div className="ficha-head"><span className="label">{card.term}</span><span className="label">Significado</span></div>
                 <p className="meaning">{card.meaning}</p>
+                {card.next_due && <span className="stamp stamp-due">Revisar {dueLabel(card.next_due)}</span>}
               </div>
             </button>
           </div>

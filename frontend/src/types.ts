@@ -48,6 +48,7 @@ export type Flashcard = {
   term: string
   meaning: string
   last_result: ReviewResult | null
+  next_due: string | null
 }
 export type ReviewResult = 'errei' | 'dificil' | 'acertei'
 

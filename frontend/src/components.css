@@ -207,3 +207,10 @@
 .steps li.done { color: #2f6b5e; }
 .steps li.now { color: #24323a; font-weight: 600; }
 .pip { width: 8px; height: 8px; border-radius: 50%; border: 1.5px solid currentColor; margin: 0 3px; }
+
+.back .stamp-due { position: absolute; right: 1rem; bottom: .9rem; color: #2f6b5e; transform: rotate(-4deg); }
+
+/* fonte com status novo, até ser vista */
+.source.is-fresh { box-shadow: var(--shadow), inset 3px 0 0 var(--green); }
+.source.is-fresh.is-error { box-shadow: var(--shadow), inset 3px 0 0 var(--red); }
+.fresh-tag { font: 600 .68rem/1 var(--sans); letter-spacing: .08em; text-transform: uppercase; color: #2f6b5e; margin-left: .5rem; }

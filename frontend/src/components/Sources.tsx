@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { AlertTriangle, Check, FileText, Loader2, RotateCcw, Trash2, Video } from 'lucide-react'
 import { api } from '../api'
 import type { Source } from '../types'
@@ -31,7 +31,19 @@ function Steps({ src }: { src: Source }) {
   )
 }
 
+const SEEN_KEY = 'acamp.seen'
+function readSeen(): Record<string, string> {
+  try { return JSON.parse(localStorage.getItem(SEEN_KEY) || '{}') } catch { return {} }
+}
+
 export default function Sources({ sources, onChange }: { sources: Source[]; onChange: () => void }) {
+  // status visto da última vez: o que mudou desde então ganha marca até a próxima visita
+  const [before] = useState(readSeen)
+  useEffect(() => {
+    const seen = readSeen()
+    for (const s of sources) seen[s.id] = s.status
+    try { localStorage.setItem(SEEN_KEY, JSON.stringify(seen)) } catch { /* sem armazenamento */ }
+  }, [sources])
   const [busy, setBusy] = useState<number | null>(null)
   const [err, setErr] = useState('')
 
@@ -47,10 +59,11 @@ export default function Sources({ sources, onChange }: { sources: Source[]; onCh
       {err && <li className="error-text" role="alert">{err}</li>}
       {sources.map(src => {
         const working = src.status !== 'done' && src.status !== 'error'
+        const fresh = !working && before[src.id] !== undefined && before[src.id] !== src.status
         return (
-          <li key={src.id} className={`ficha source ${working ? 'is-working' : ''} ${src.status === 'error' ? 'is-error' : ''}`}>
+          <li key={src.id} className={`ficha source ${working ? 'is-working' : ''} ${src.status === 'error' ? 'is-error' : ''} ${fresh ? 'is-fresh' : ''}`}>
             <div className="ficha-head">
-              <span className="label">{src.kind === 'youtube' ? <Video size={13} aria-hidden /> : <FileText size={13} aria-hidden />} {src.kind.toUpperCase()}</span>
+              <span className="label">{src.kind === 'youtube' ? <Video size={13} aria-hidden /> : <FileText size={13} aria-hidden />} {src.kind.toUpperCase()}{fresh && <span className="fresh-tag">{src.status === 'done' ? 'Pronto agora' : 'Falhou'}</span>}</span>
               <span className="label num">{new Date(src.created_at.endsWith('Z') || src.created_at.includes('+') ? src.created_at : src.created_at + 'Z').toLocaleDateString('pt-BR')}</span>
             </div>
             <div className="source-body">

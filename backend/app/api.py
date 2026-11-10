@@ -178,7 +178,8 @@ def subtopics(topic_id: int):
 def flashcards(topic_id: int, student_id: int, subtopics: str | None = None):
     cards = db.topic_flashcards(topic_id, _ids(subtopics))
     last = db.last_reviews(student_id, [c.id for c in cards])
-    return [{**c.model_dump(), "last_result": last[c.id].result if c.id in last else None} for c in cards]
+    return [{**c.model_dump(), "last_result": last[c.id].result if c.id in last else None,
+             "next_due": (lambda d: d.isoformat() if d.tzinfo else d.isoformat() + "Z")(last[c.id].next_due) if c.id in last else None} for c in cards]
 
 
 @app.post("/api/flashcards/{fid}/review")
