@@ -1,0 +1,201 @@
+{
+  "$defs": {
+    "Flashcard": {
+      "properties": {
+        "subtopic_id": {
+          "title": "Subtopic Id",
+          "type": "integer"
+        },
+        "term": {
+          "description": "Frente: termo ou conceito do conteúdo.",
+          "minLength": 1,
+          "title": "Term",
+          "type": "string"
+        },
+        "meaning": {
+          "description": "Verso: somente o significado / o que é.",
+          "minLength": 1,
+          "title": "Meaning",
+          "type": "string"
+        }
+      },
+      "required": [
+        "subtopic_id",
+        "term",
+        "meaning"
+      ],
+      "title": "Flashcard",
+      "type": "object"
+    },
+    "GuideSection": {
+      "properties": {
+        "title": {
+          "minLength": 1,
+          "title": "Title",
+          "type": "string"
+        },
+        "summary": {
+          "description": "Explicação didática desta parte do conteúdo.",
+          "minLength": 1,
+          "title": "Summary",
+          "type": "string"
+        },
+        "key_points": {
+          "description": "Pontos principais para estudar.",
+          "items": {
+            "minLength": 1,
+            "type": "string"
+          },
+          "minItems": 1,
+          "title": "Key Points",
+          "type": "array"
+        }
+      },
+      "required": [
+        "title",
+        "summary",
+        "key_points"
+      ],
+      "title": "GuideSection",
+      "type": "object"
+    },
+    "Question": {
+      "properties": {
+        "subtopic_id": {
+          "title": "Subtopic Id",
+          "type": "integer"
+        },
+        "difficulty": {
+          "enum": [
+            "facil",
+            "medio",
+            "dificil"
+          ],
+          "title": "Difficulty",
+          "type": "string"
+        },
+        "question": {
+          "minLength": 1,
+          "title": "Question",
+          "type": "string"
+        },
+        "options": {
+          "description": "Exatamente 4 alternativas.",
+          "items": {
+            "minLength": 1,
+            "type": "string"
+          },
+          "maxItems": 4,
+          "minItems": 4,
+          "title": "Options",
+          "type": "array"
+        },
+        "correct_index": {
+          "maximum": 3,
+          "minimum": 0,
+          "title": "Correct Index",
+          "type": "integer"
+        },
+        "explanation": {
+          "minLength": 1,
+          "title": "Explanation",
+          "type": "string"
+        }
+      },
+      "required": [
+        "subtopic_id",
+        "difficulty",
+        "question",
+        "options",
+        "correct_index",
+        "explanation"
+      ],
+      "title": "Question",
+      "type": "object"
+    },
+    "StudyGuide": {
+      "properties": {
+        "overview": {
+          "description": "Resumo geral do assunto em 2-4 frases.",
+          "minLength": 1,
+          "title": "Overview",
+          "type": "string"
+        },
+        "sections": {
+          "items": {
+            "$ref": "#/$defs/GuideSection"
+          },
+          "minItems": 1,
+          "title": "Sections",
+          "type": "array"
+        }
+      },
+      "required": [
+        "overview",
+        "sections"
+      ],
+      "title": "StudyGuide",
+      "type": "object"
+    },
+    "SubTopic": {
+      "properties": {
+        "id": {
+          "minimum": 1,
+          "title": "Id",
+          "type": "integer"
+        },
+        "name": {
+          "description": "Nome curto do tópico abordado no conteúdo.",
+          "minLength": 1,
+          "title": "Name",
+          "type": "string"
+        }
+      },
+      "required": [
+        "id",
+        "name"
+      ],
+      "title": "SubTopic",
+      "type": "object"
+    }
+  },
+  "description": "O que a LLM deve gerar.",
+  "properties": {
+    "subtopics": {
+      "items": {
+        "$ref": "#/$defs/SubTopic"
+      },
+      "maxItems": 10,
+      "minItems": 1,
+      "title": "Subtopics",
+      "type": "array"
+    },
+    "study_guide": {
+      "$ref": "#/$defs/StudyGuide"
+    },
+    "flashcards": {
+      "items": {
+        "$ref": "#/$defs/Flashcard"
+      },
+      "minItems": 5,
+      "title": "Flashcards",
+      "type": "array"
+    },
+    "questions": {
+      "items": {
+        "$ref": "#/$defs/Question"
+      },
+      "minItems": 6,
+      "title": "Questions",
+      "type": "array"
+    }
+  },
+  "required": [
+    "subtopics",
+    "study_guide",
+    "flashcards",
+    "questions"
+  ],
+  "title": "StudyContent",
+  "type": "object"
+}
